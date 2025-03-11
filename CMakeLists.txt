@@ -23,6 +23,8 @@ if(USE_FREERTOS)
     include_directories(${PROJECT_SOURCE_DIR}/FreeRTOS/include)
     include_directories(${PROJECT_SOURCE_DIR}/FreeRTOS/portable/ThirdParty/GCC/Posix)
     include_directories(${PROJECT_SOURCE_DIR}/config)
+    include_directories(${PROJECT_SOURCE_DIR}/app/ui)
+    include_directories(${PROJECT_SOURCE_DIR}/app/)
 
     # Add FreeRTOS sources
     file(GLOB FREERTOS_SOURCES
@@ -30,9 +32,13 @@ if(USE_FREERTOS)
         "${PROJECT_SOURCE_DIR}/FreeRTOS/portable/MemMang/heap_4.c"
         "${PROJECT_SOURCE_DIR}/FreeRTOS/portable/ThirdParty/GCC/Posix/*.c"
     )
+    file(GLOB UI_SOURCES "${PROJECT_SOURCE_DIR}/app/ui/*.c")
+    file(GLOB APP_SOURCES "${PROJECT_SOURCE_DIR}/app/*.c")
 else()
     message(STATUS "FreeRTOS is disabled")
     set(FREERTOS_SOURCES "")  # No FreeRTOS sources if FreeRTOS is disabled
+    file(GLOB UI_SOURCES "${PROJECT_SOURCE_DIR}/app/ui/*.c")
+    file(GLOB APP_SOURCES "${PROJECT_SOURCE_DIR}/app/*.c")
 endif()
 
 # Main include files of the project
@@ -79,6 +85,8 @@ if(USE_FREERTOS)
         ${PROJECT_SOURCE_DIR}/main/src/mouse_cursor_icon.c
         ${PROJECT_SOURCE_DIR}/main/src/FreeRTOS_Posix_Port.c
         ${FREERTOS_SOURCES}  # Add only if USE_FREERTOS is enabled
+        ${UI_SOURCES}
+        ${APP_SOURCES}
     )
     # Link FreeRTOS libraries
     target_link_libraries(main freertos_config FreeRTOS)
@@ -86,6 +94,8 @@ else()
     add_executable(main
         ${PROJECT_SOURCE_DIR}/main/src/main.c
         ${PROJECT_SOURCE_DIR}/main/src/mouse_cursor_icon.c
+        ${UI_SOURCES}
+        ${APP_SOURCES}
     )
 endif()
 
@@ -177,3 +187,14 @@ else()
     message(STATUS "AddressSanitizer disabled")
 endif()
 endif()
+
+set(SOURCES
+    # ...existing source files...
+    app/ui/screens.c
+    app/ui/vars.c
+    app/ui/actions.c
+    app/app.c
+    app/ui/ui.c  # Ensure this file is included if it contains ui_init and ui_tick
+    utils/circular_buffer.c  # Add this line
+    # ...existing source files...
+)
