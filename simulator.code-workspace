@@ -35,7 +35,16 @@
 			"stdint.h": "c",
 			"app.h": "c",
 			"stdio.h": "c",
-			"stdlib.h": "c"
+			"stdlib.h": "c",
+			"circular_buffer.h": "c",
+			"random": "c",
+			"limits": "c",
+			"semaphore": "c",
+			"lv_chart_private.h": "c",
+			"lv_draw_private.h": "c",
+			"lv_area_private.h": "c",
+			"lv_obj_private.h": "c",
+			"lv_obj_class_private.h": "c"
 		},
 	},
 	// tasks.json section
