@@ -44,7 +44,22 @@
 			"lv_draw_private.h": "c",
 			"lv_area_private.h": "c",
 			"lv_obj_private.h": "c",
-			"lv_obj_class_private.h": "c"
+			"lv_obj_class_private.h": "c",
+			"stdbool.h": "c",
+			"stddef.h": "c",
+			"array": "c",
+			"string": "c",
+			"string_view": "c",
+			"sensor.h": "c",
+			"string.h": "c",
+			"cstdint": "c",
+			"optional": "c",
+			"ratio": "c",
+			"system_error": "c",
+			"functional": "c",
+			"tuple": "c",
+			"type_traits": "c",
+			"utility": "c"
 		},
 	},
 	// tasks.json section
