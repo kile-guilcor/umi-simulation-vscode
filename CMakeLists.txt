@@ -34,11 +34,13 @@ if(USE_FREERTOS)
     )
     file(GLOB UI_SOURCES "${PROJECT_SOURCE_DIR}/app/ui/*.c")
     file(GLOB APP_SOURCES "${PROJECT_SOURCE_DIR}/app/*.c")
+    file(GLOB UTILS_SOURCES "${PROJECT_SOURCE_DIR}/utils/*.c")
 else()
     message(STATUS "FreeRTOS is disabled")
     set(FREERTOS_SOURCES "")  # No FreeRTOS sources if FreeRTOS is disabled
     file(GLOB UI_SOURCES "${PROJECT_SOURCE_DIR}/app/ui/*.c")
     file(GLOB APP_SOURCES "${PROJECT_SOURCE_DIR}/app/*.c")
+    file(GLOB UTILS_SOURCES "${PROJECT_SOURCE_DIR}/utils/*.c")
 endif()
 
 # Main include files of the project
@@ -87,6 +89,7 @@ if(USE_FREERTOS)
         ${FREERTOS_SOURCES}  # Add only if USE_FREERTOS is enabled
         ${UI_SOURCES}
         ${APP_SOURCES}
+        ${UTILS_SOURCES}
     )
     # Link FreeRTOS libraries
     target_link_libraries(main freertos_config FreeRTOS)
@@ -96,6 +99,7 @@ else()
         ${PROJECT_SOURCE_DIR}/main/src/mouse_cursor_icon.c
         ${UI_SOURCES}
         ${APP_SOURCES}
+        ${UTILS_SOURCES}
     )
 endif()
 
