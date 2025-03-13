@@ -56,7 +56,7 @@
         {
           "objID": "5acc59e4-72a7-471e-b646-6762521a3d22",
           "fileName": "vars.c",
-          "template": "#include <stdio.h>\r\n#include <string.h>\r\n#include <lvgl/lvgl.h>\r\n\r\n#include \"vars.h\"\r\n#include \"screens.h\"\r\n#include \"ui.h\"\r\n\r\n#include \"utils/circular_buffer.h\"\r\n#include \"app/sensor.h\"\r\n\r\n/*\r\nGlobal variables\r\n*/\r\nextern Sensor sensor_arr[4];\r\nchar date_info[100] = { 0 };\r\nchar sensor_name_info[100] = { 0 };\r\nint current_sensor =  0;\r\n\r\n/*\r\nMin Values\r\n*/\r\nvoid set_var_sensor_min(float value) {\r\n    sensor_arr[current_sensor].min = value;\r\n}\r\n\r\nfloat get_var_sensor_min() {\r\n    return sensor_arr[current_sensor].min;\r\n}\r\n\r\nconst char *get_var_sensor_min_info() {\r\n    static char sensor_min_info[100] = { 0 };\r\n    snprintf(sensor_min_info, sizeof(sensor_min_info), \"%.2f\", sensor_arr[current_sensor].min);\r\n    return sensor_min_info;\r\n}\r\n\r\n/*\r\nMax Values\r\n*/\r\nvoid set_var_sensor_max(float value) {\r\n    sensor_arr[current_sensor].max = value;\r\n}\r\n\r\nfloat get_var_sensor_max() {\r\n    return sensor_arr[current_sensor].max;\r\n}\r\n\r\nconst char *get_var_sensor_max_info() {\r\n    static char sensor_max_info[100] = { 0 };\r\n    snprintf(sensor_max_info, sizeof(sensor_max_info), \"%.2f\", sensor_arr[current_sensor].max);\r\n    return sensor_max_info;\r\n}\r\n\r\nvoid set_var_sensor_accuracy(float value) {\r\n    sensor_arr[current_sensor].accuracy = value;\r\n}\r\n\r\n/*\r\nAccuracy\r\n*/\r\nconst char *get_var_sensor_accuracy_info() {\r\n    static char sensor_accuracy_info[100] = { 0 };\r\n    snprintf(sensor_accuracy_info, sizeof(sensor_accuracy_info), \"%.2f\", sensor_arr[current_sensor].accuracy);\r\n    return sensor_accuracy_info;\r\n}\r\n\r\n/*\r\nUnit\r\n*/\r\nconst char *get_var_sensor_unit_info() {\r\n    return sensor_arr[current_sensor].unit;\r\n}\r\n\r\nvoid set_var_sensor_unit_info(const char *value) {\r\n    strncpy(sensor_arr[current_sensor].unit, value, sizeof(sensor_arr[current_sensor].unit) / sizeof(char));\r\n    sensor_arr[current_sensor].unit[sizeof(sensor_arr[current_sensor].unit) / sizeof(char) - 1] = 0;\r\n}\r\n\r\n/*\r\nDate\r\n*/\r\nconst char *get_var_date_info() {\r\n    return date_info;\r\n}\r\n\r\nvoid set_var_date_info(const char *value) {\r\n    strncpy(date_info, value, sizeof(date_info) / sizeof(char));\r\n    date_info[sizeof(date_info) / sizeof(char) - 1] = 0;\r\n}\r\n\r\n/*\r\nSensor Name\r\n*/\r\nconst char *get_var_sensor_name_info() {\r\n    return sensor_arr[current_sensor].name;\r\n}\r\n\r\nvoid set_var_sensor_name_info(const char *value) {\r\n    strncpy(sensor_name_info, value, sizeof(sensor_name_info) / sizeof(char));\r\n    sensor_name_info[sizeof(sensor_name_info) / sizeof(char) - 1] = 0;\r\n}\r\n\r\n/*\r\nSensor Index\r\n*/\r\nvoid set_var_current_sensor(int value) {\r\n    current_sensor = value;\r\n}\r\n\r\n/*\r\nSensor names\r\n*/\r\n\r\nconst char *get_var_sensor_name_1() {\r\n    return sensor_arr[0].name;\r\n}\r\n\r\nconst char *get_var_sensor_name_2() {\r\n    return sensor_arr[1].name;\r\n}\r\n\r\nconst char *get_var_sensor_name_3() {\r\n    return sensor_arr[2].name;\r\n}\r\n\r\nconst char *get_var_sensor_name_4() {\r\n    return sensor_arr[3].name;\r\n}\r\n\r\n/*\r\nSensor Value\r\n*/\r\n\r\nconst char *get_var_sensor_value_info() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[current_sensor]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\nconst char *get_var_sensor_value_1() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[0]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\nconst char *get_var_sensor_value_2() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[1]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\nconst char *get_var_sensor_value_3() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[2]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\nconst char *get_var_sensor_value_4() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[3]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\n/*\r\nSensor units\r\n*/\r\n\r\nconst char *get_var_sensor_unit_1() {\r\n    return sensor_arr[0].unit;\r\n}\r\n\r\nconst char *get_var_sensor_unit_2() {\r\n    return sensor_arr[1].unit;\r\n}\r\n\r\nconst char *get_var_sensor_unit_3() {\r\n    return sensor_arr[2].unit;\r\n}\r\n\r\nconst char *get_var_sensor_unit_4() {\r\n    return sensor_arr[3].unit;\r\n}\r\n"
+          "template": "#include <stdio.h>\r\n#include <string.h>\r\n#include <lvgl/lvgl.h>\r\n\r\n#include \"vars.h\"\r\n#include \"screens.h\"\r\n#include \"ui.h\"\r\n\r\n#include \"utils/circular_buffer.h\"\r\n#include \"app/sensor.h\"\r\n\r\n/*\r\nGlobal variables\r\n*/\r\nextern Sensor sensor_arr[4];\r\nchar date_info[100] = { 0 };\r\nchar sensor_name_info[100] = { 0 };\r\nint current_sensor =  0;\r\nint runtime_m = 0;\r\nint memory = 0;\r\n\r\n/*\r\nMin Values\r\n*/\r\nvoid set_var_sensor_min(float value) {\r\n    sensor_arr[current_sensor].min = value;\r\n}\r\n\r\nfloat get_var_sensor_min() {\r\n    return sensor_arr[current_sensor].min;\r\n}\r\n\r\nconst char *get_var_sensor_min_info() {\r\n    static char sensor_min_info[100] = { 0 };\r\n    snprintf(sensor_min_info, sizeof(sensor_min_info), \"%.2f\", sensor_arr[current_sensor].min);\r\n    return sensor_min_info;\r\n}\r\n\r\n/*\r\nMax Values\r\n*/\r\nvoid set_var_sensor_max(float value) {\r\n    sensor_arr[current_sensor].max = value;\r\n}\r\n\r\nfloat get_var_sensor_max() {\r\n    return sensor_arr[current_sensor].max;\r\n}\r\n\r\nconst char *get_var_sensor_max_info() {\r\n    static char sensor_max_info[100] = { 0 };\r\n    snprintf(sensor_max_info, sizeof(sensor_max_info), \"%.2f\", sensor_arr[current_sensor].max);\r\n    return sensor_max_info;\r\n}\r\n\r\nvoid set_var_sensor_accuracy(float value) {\r\n    sensor_arr[current_sensor].accuracy = value;\r\n}\r\n\r\n/*\r\nAccuracy\r\n*/\r\nconst char *get_var_sensor_accuracy_info() {\r\n    static char sensor_accuracy_info[100] = { 0 };\r\n    snprintf(sensor_accuracy_info, sizeof(sensor_accuracy_info), \"%.2f\", sensor_arr[current_sensor].accuracy);\r\n    return sensor_accuracy_info;\r\n}\r\n\r\n/*\r\nUnit\r\n*/\r\nconst char *get_var_sensor_unit_info() {\r\n    return sensor_arr[current_sensor].unit;\r\n}\r\n\r\nvoid set_var_sensor_unit_info(const char *value) {\r\n    strncpy(sensor_arr[current_sensor].unit, value, sizeof(sensor_arr[current_sensor].unit) / sizeof(char));\r\n    sensor_arr[current_sensor].unit[sizeof(sensor_arr[current_sensor].unit) / sizeof(char) - 1] = 0;\r\n}\r\n\r\n/*\r\nDate\r\n*/\r\nconst char *get_var_date_info() {\r\n    return date_info;\r\n}\r\n\r\nvoid set_var_date_info(const char *value) {\r\n    strncpy(date_info, value, sizeof(date_info) / sizeof(char));\r\n    date_info[sizeof(date_info) / sizeof(char) - 1] = 0;\r\n}\r\n\r\n/*\r\nSensor Name\r\n*/\r\nconst char *get_var_sensor_name_info() {\r\n    return sensor_arr[current_sensor].name;\r\n}\r\n\r\nvoid set_var_sensor_name_info(const char *value) {\r\n    strncpy(sensor_name_info, value, sizeof(sensor_name_info) / sizeof(char));\r\n    sensor_name_info[sizeof(sensor_name_info) / sizeof(char) - 1] = 0;\r\n}\r\n\r\n/*\r\nSensor Index\r\n*/\r\nvoid set_var_current_sensor(int value) {\r\n    current_sensor = value;\r\n}\r\n\r\n/*\r\nSensor names\r\n*/\r\n\r\nconst char *get_var_sensor_name_1() {\r\n    return sensor_arr[0].name;\r\n}\r\n\r\nconst char *get_var_sensor_name_2() {\r\n    return sensor_arr[1].name;\r\n}\r\n\r\nconst char *get_var_sensor_name_3() {\r\n    return sensor_arr[2].name;\r\n}\r\n\r\nconst char *get_var_sensor_name_4() {\r\n    return sensor_arr[3].name;\r\n}\r\n\r\n/*\r\nSensor Value\r\n*/\r\n\r\nconst char *get_var_sensor_value_info() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[current_sensor]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\nconst char *get_var_sensor_value_1() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[0]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\nconst char *get_var_sensor_value_2() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[1]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\nconst char *get_var_sensor_value_3() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[2]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\nconst char *get_var_sensor_value_4() {\r\n    static char sensor_value_info[100] = { 0 };\r\n    float sensor_value = sensor_get_reading(&sensor_arr[3]);\r\n    snprintf(sensor_value_info, sizeof(sensor_value_info), \"%.2f\", sensor_value);\r\n    return sensor_value_info;\r\n}\r\n\r\n/*\r\nSensor units\r\n*/\r\n\r\nconst char *get_var_sensor_unit_1() {\r\n    return sensor_arr[0].unit;\r\n}\r\n\r\nconst char *get_var_sensor_unit_2() {\r\n    return sensor_arr[1].unit;\r\n}\r\n\r\nconst char *get_var_sensor_unit_3() {\r\n    return sensor_arr[2].unit;\r\n}\r\n\r\nconst char *get_var_sensor_unit_4() {\r\n    return sensor_arr[3].unit;\r\n}\r\n\r\n/*\r\nRuntime\r\n*/\r\nvoid set_var_runtime_m(int value) {\r\n    runtime_m = value;\r\n}\r\n\r\nint get_var_runtime_m() {\r\n    return runtime_m;\r\n}\r\n\r\nconst char *get_var_runtime_info() {\r\n    static char runtime_info[100] = { 0 };\r\n    snprintf(runtime_info, sizeof(runtime_info), \"%d m\", runtime_m);\r\n    return runtime_info;\r\n}\r\n\r\n/*\r\nMemory\r\n*/\r\nvoid set_var_memory(int value) {\r\n    memory = value;\r\n}\r\n\r\nint get_var_memory() {\r\n    return memory;\r\n}\r\n\r\nconst char *get_var_memory_info() {\r\n    static char memory_info[100] = { 0 };\r\n    snprintf(memory_info, sizeof(memory_info), \"%d %%\", memory);\r\n    return memory_info;\r\n}\r\n"
         },
         {
           "objID": "7111ff51-bbd1-4e8e-a194-0feb85c030b5",
@@ -303,6 +303,38 @@
         "defaultValue": "\"\"",
         "persistent": false,
         "native": false
+      },
+      {
+        "objID": "09a2c0f9-0a79-4a7b-a2d9-717be49125ae",
+        "name": "memory_info",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "ebdbc987-0035-4a03-8b38-e0b4af698d0f",
+        "name": "runtime_info",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "4e0d24ef-d5ae-4e02-88d4-89a52171cdb5",
+        "name": "memory",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "e266a234-4d19-4e39-95b6-663038740725",
+        "name": "runtime_m",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": false
       }
     ],
     "structures": [],
@@ -509,7 +541,15 @@
                 "childStyles": []
               },
               "timeline": [],
-              "eventHandlers": [],
+              "eventHandlers": [
+                {
+                  "objID": "62e144de-0ad7-48ab-b73a-c1a62cbf6919",
+                  "eventName": "PRESSED",
+                  "handlerType": "action",
+                  "action": "show_page3_screen",
+                  "userData": 0
+                }
+              ],
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
@@ -2155,10 +2195,10 @@
                 {
                   "objID": "e6bd90b0-ac6d-4bd1-fb4c-e2f2105f605e",
                   "type": "LVGLScaleWidget",
-                  "left": 181,
-                  "top": -8,
-                  "width": 29,
-                  "height": 137,
+                  "left": 182,
+                  "top": -2,
+                  "width": 25,
+                  "height": 127,
                   "customInputs": [],
                   "customOutputs": [],
                   "style": {
@@ -2232,7 +2272,7 @@
                   },
                   "timeline": [],
                   "eventHandlers": [],
-                  "identifier": "sensor_chart",
+                  "identifier": "sensor_chart_1",
                   "leftUnit": "px",
                   "topUnit": "px",
                   "widthUnit": "px",
@@ -2256,10 +2296,10 @@
                       "MAIN": {
                         "DEFAULT": {
                           "radius": 5,
-                          "pad_top": 0,
-                          "pad_bottom": 0,
-                          "pad_left": 0,
-                          "pad_right": 0,
+                          "pad_top": 3,
+                          "pad_bottom": 3,
+                          "pad_left": 3,
+                          "pad_right": 3,
                           "pad_row": 0,
                           "pad_column": 0
                         }
@@ -3702,9 +3742,9 @@
               "objID": "3312c63a-4359-4d3b-ba54-19502123d2c5",
               "type": "LVGLPanelWidget",
               "left": 0,
-              "top": 30,
-              "width": 240,
-              "height": 187,
+              "top": 150,
+              "width": 160,
+              "height": 120,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -3721,23 +3761,23 @@
               "heightUnit": "px",
               "children": [
                 {
-                  "objID": "82cde119-0723-4f4f-aad5-a42721859db6",
-                  "type": "LVGLChartWidget",
-                  "left": 12,
-                  "top": 10,
-                  "width": 187,
-                  "height": 137,
+                  "objID": "2f7113ab-805c-46d0-89b6-c0052da1197a",
+                  "type": "LVGLScaleWidget",
+                  "left": 110,
+                  "top": -5,
+                  "width": 14,
+                  "height": 102,
                   "customInputs": [],
                   "customOutputs": [],
                   "style": {
-                    "objID": "2261f4e0-f202-4e8e-a1e7-83104457e3d4",
+                    "objID": "cff607d0-7bc2-4a3e-96f2-0c0e8e40a844",
                     "useStyle": "default",
                     "conditionalStyles": [],
                     "childStyles": []
                   },
                   "timeline": [],
                   "eventHandlers": [],
-                  "identifier": "sensor_chart_1",
+                  "identifier": "y_scale_2",
                   "leftUnit": "px",
                   "topUnit": "px",
                   "widthUnit": "px",
@@ -3755,13 +3795,90 @@
                   "disabledStateType": "literal",
                   "states": "",
                   "localStyles": {
-                    "objID": "bf378e4e-f499-436a-bd40-487d53f15829"
+                    "objID": "a3000e90-d0f1-41ad-c02f-1c8e4caa2b48",
+                    "definition": {
+                      "ITEMS": {
+                        "DEFAULT": {
+                          "length": 5
+                        }
+                      },
+                      "INDICATOR": {
+                        "DEFAULT": {
+                          "length": 10
+                        }
+                      },
+                      "MAIN": {
+                        "DEFAULT": {
+                          "text_font": "MONTSERRAT_10"
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "scaleMode": "VERTICAL_RIGHT",
+                  "minorRange": 0,
+                  "majorRange": 100,
+                  "totalTickCount": 10,
+                  "majorTickEvery": 9,
+                  "showLabels": true
+                },
+                {
+                  "objID": "6293c6d9-5a91-431f-be60-84c5e1e12c51",
+                  "type": "LVGLChartWidget",
+                  "left": -7,
+                  "top": -11,
+                  "width": 117,
+                  "height": 112,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "35a61680-2986-4f47-877f-8f26fef31672",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "identifier": "sensor_chart_2",
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "px",
+                  "heightUnit": "px",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlag": true,
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "useStyle": "",
+                  "localStyles": {
+                    "objID": "a3ad74bc-f645-4e36-fde9-63e16dd0df43",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "radius": 5,
+                          "pad_top": 3,
+                          "pad_bottom": 3,
+                          "pad_left": 3,
+                          "pad_right": 3,
+                          "pad_row": 0,
+                          "pad_column": 0
+                        }
+                      }
+                    }
                   },
                   "group": "",
                   "groupIndex": 0
                 }
               ],
-              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
               "hiddenFlagType": "literal",
               "clickableFlag": true,
               "clickableFlagType": "literal",
@@ -3781,8 +3898,8 @@
             {
               "objID": "3f5732d5-533a-452b-eb3c-e7337b4ce203",
               "type": "LVGLPanelWidget",
-              "left": 0,
-              "top": 219,
+              "left": 160,
+              "top": 125,
               "width": 80,
               "height": 50,
               "customInputs": [],
@@ -4067,8 +4184,8 @@
             {
               "objID": "9ee886e4-d88c-44e9-b6a0-347b8657337e",
               "type": "LVGLPanelWidget",
-              "left": 80,
-              "top": 219,
+              "left": 160,
+              "top": 30,
               "width": 80,
               "height": 50,
               "customInputs": [],
@@ -4211,7 +4328,7 @@
               "objID": "2d1264cb-3a37-4757-cfca-a0c19aa366d7",
               "type": "LVGLPanelWidget",
               "left": 160,
-              "top": 219,
+              "top": 78,
               "width": 80,
               "height": 50,
               "customInputs": [],
@@ -4880,6 +4997,342 @@
                     }
                   }
                 }
+              },
+              "group": "",
+              "groupIndex": 0
+            },
+            {
+              "objID": "2933c3b7-4b99-42d1-c961-9e14362f3147",
+              "type": "LVGLPanelWidget",
+              "left": 160,
+              "top": 173,
+              "width": 80,
+              "height": 50,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "1205e163-c60c-481a-82bd-5a857b661758",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "accuracy_panel_3",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "px",
+              "heightUnit": "px",
+              "children": [
+                {
+                  "objID": "6ed5ef8e-f38b-4d9a-c9df-a22e49beb713",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 30,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "030fcf30-dd33-410a-b43e-c083b603f43c",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "3f5f2265-c0f6-4123-9d67-7a38e5dc87c0",
+                    "definition": {
+                      "MAIN": {
+                        "SCROLLED": {
+                          "align": "CENTER"
+                        },
+                        "DEFAULT": {
+                          "align": "CENTER"
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "runtime_info",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "88%"
+                }
+              ],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlag": true,
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "0e2441da-275d-4fc4-bd60-ccad68d78c2a",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "radius": 0
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0
+            },
+            {
+              "objID": "bb99d2d2-6393-40c2-d0e1-6c0729562826",
+              "type": "LVGLPanelWidget",
+              "left": 160,
+              "top": 220,
+              "width": 80,
+              "height": 50,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "39aae4cf-12fb-4c47-e1dc-6fa9809a3e25",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "accuracy_panel_4",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "px",
+              "heightUnit": "px",
+              "children": [
+                {
+                  "objID": "ea109d2a-fbd1-43b4-9925-f03e8e3fe151",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 41,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "654d05bb-b120-4c46-df3f-a13300440947",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "80b394fe-df80-4c68-de12-9cf67a294d68",
+                    "definition": {
+                      "MAIN": {
+                        "SCROLLED": {
+                          "align": "CENTER"
+                        },
+                        "DEFAULT": {
+                          "align": "CENTER"
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "memory_info",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "1024h"
+                }
+              ],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlag": true,
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "e15a4ea5-c55f-4724-ef59-629b72c4c56f",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "radius": 0
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0
+            },
+            {
+              "objID": "d0f9a96b-3b7b-4d3f-da3c-f4bc2575f7d8",
+              "type": "LVGLPanelWidget",
+              "left": 0,
+              "top": 30,
+              "width": 160,
+              "height": 120,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "32faba0b-138d-4f14-ea07-8de1b1555a96",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "px",
+              "heightUnit": "px",
+              "children": [
+                {
+                  "objID": "028d7a47-8fca-4c07-e508-ff63608724ba",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 57,
+                  "height": 52,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "55f43a49-3f25-4eb9-a991-229e174417d8",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "identifier": "sensor_value_1",
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "c2d45816-66c0-4ca8-ca32-f903b748ef28",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "text_font": "MONTSERRAT_48",
+                          "align": "CENTER"
+                        }
+                      }
+                    }
+                  },
+                  "groupIndex": 0,
+                  "text": "sensor_value_info",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "39"
+                },
+                {
+                  "objID": "f3780192-53ab-4fdf-a450-3a6d9f14f345",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 27,
+                  "width": 27,
+                  "height": 27,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "0c3feb46-4352-4b98-c696-03e6dd913d8d",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "identifier": "sensor_unit_5",
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "f6989b47-f362-4c27-ed24-027f7d5a2146",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "text_font": "MONTSERRAT_24",
+                          "align": "CENTER"
+                        }
+                      }
+                    }
+                  },
+                  "groupIndex": 0,
+                  "text": "sensor_unit_info",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "°C"
+                }
+              ],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlag": true,
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "206292da-61b6-4f3e-8ca3-f403dd2f9a0a"
               },
               "group": "",
               "groupIndex": 0

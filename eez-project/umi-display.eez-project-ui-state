@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[umi-display.eez-project]:/userPages/3",
+    "selectedUserPageObject": "[umi-display.eez-project]:/userPages/0",
     "selectedActionObject": "[umi-display.eez-project]:/actions/0",
     "selectedGlobalVariableObject": "[umi-display.eez-project]:/variables/globalVariables/20",
     "subnavigationSelectedItems": {
@@ -197,11 +197,11 @@
                 {
                   "type": "tab",
                   "id": "#74b75c9b-73ad-4d36-9d7e-5a606a9b44e7",
-                  "name": "page4",
+                  "name": "main",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[umi-display.eez-project]:/userPages/3",
-                    "permanent": false
+                    "objectPath": "[umi-display.eez-project]:/userPages/0",
+                    "permanent": true
                   },
                   "icon": "svg:page"
                 },
@@ -1014,9 +1014,7 @@
           "8": {},
           "10": {},
           "11": {
-            "0": {
-              "$selected": true
-            }
+            "0": {}
           },
           "12": {}
         }
