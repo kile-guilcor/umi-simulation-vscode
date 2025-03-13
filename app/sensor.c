@@ -22,10 +22,10 @@ void sensor_init(Sensor* sensor, const char* name, const char* unit, float min, 
     sensor->accuracy = accuracy;
 
     strncpy(sensor->unit, unit, sizeof(sensor->unit) - 1);
-    sensor->unit[sizeof(sensor->unit) - 1] = '\0';  // Ensure null termination
+    sensor->unit[sizeof(sensor->unit) - 1] = '\0';
 
     strncpy(sensor->name, name, sizeof(sensor->name) - 1);
-    sensor->name[sizeof(sensor->name) - 1] = '\0';  // Ensure null termination
+    sensor->name[sizeof(sensor->name) - 1] = '\0';
 }
 
 void sensors_init() {

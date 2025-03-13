@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 
   #if LV_USE_OS == LV_OS_NONE
 
-  lv_demo_widgets();
+  // lv_demo_widgets();
   ui_init();
   app_setup(); // Call app_setup()
 
